@@ -561,48 +561,44 @@ mjx-container[display="true"] + br {
 
         
             
-    <div id="gitalk-container"></div>
-    <script data-swup-reload-script
-            src="https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.min.js"></script>
-    <script data-swup-reload-script>
-
-        function loadGitalk() {
-            let __gitalk__pathname = decodeURI(location.pathname);
-            const __gitalk__pathnameLength = __gitalk__pathname.length;
-            const __gitalk__pathnameMaxLength = 50;
-            if (__gitalk__pathnameLength > __gitalk__pathnameMaxLength) {
-                __gitalk__pathname = __gitalk__pathname.substring(0, __gitalk__pathnameMaxLength - 3) + '...';
+    <div id="giscus-container"></div>
+    <script data-swup-reload-script defer>
+        async function loadGiscus() {
+            const giscusConfig = {
+                'src': 'https://giscus.app/client.js',
+                'data-repo': 'signlightw/giscus_blog',
+                'data-repo-id': 'R_kgDONSRX6w',
+                'data-category': 'Announcements',
+                'data-category-id': 'DIC_kwDONSRX684Ckcus',
+                'data-mapping': 'title',
+                'data-strict': '0',
+                'data-reactions-enabled': '1',
+                'data-emit-metadata': '1',
+                'data-theme': 'preferred_color_scheme',
+                'data-lang': 'zh-CN',
+                'data-input-position': 'top',
+                'data-loading': 'lazy',
+                'crossorigin': 'anonymous',
+                'async': true
             }
-
-            try {
-                Gitalk && new Gitalk({
-                    clientID: 'Ov23liejY7CEKowP15zd',
-                    clientSecret: 'd9ccbee8cdda2a50b1c590da9e62d1c383469f54',
-                    repo: 'gittalk_blog',
-                    owner: 'signlightw',
-                    admin: ['signlightw'],
-                    id: __gitalk__pathname,
-                    language: 'zh-CN',
-                    proxy: 'https://github.com/login/oauth/access_token'
-                }).render('gitalk-container');
-
-            } catch (e) {
-                window.Gitalk = null;
+            const giscusScript = document.createElement('script');
+            for (const key in giscusConfig) {
+                giscusScript.setAttribute(key, giscusConfig[key]);
             }
+            document.getElementById('giscus-container').appendChild(giscusScript);
         }
-
         if ('true') {
-            const loadGitalkTimeout = setTimeout(() => {
-                loadGitalk();
-                clearTimeout(loadGitalkTimeout);
+            let loadGiscusTimeout = setTimeout(() => {
+                loadGiscus();
+                clearTimeout(loadGiscusTimeout);
             }, 1000);
         } else {
-            window.addEventListener('DOMContentLoaded', loadGitalk);
+            document.addEventListener('DOMContentLoaded', loadGiscus);
         }
     </script>
 
 
-
+        
         
     
 </div>
